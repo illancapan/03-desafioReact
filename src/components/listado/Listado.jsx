@@ -1,26 +1,44 @@
-// import { useState } from "react"
-import PropTypes from "prop-types"
-import { BaseColaboradores } from "/src/assets/js/BaseColaboradores"
+import  { useState } from 'react';
 
-const Listado = ({ data, setData, dataFilter, setDataFilter }) => {
-  const deleteColaborador = (id) => {
-    const nuevaData = data.filter((colaborador) => colaborador.id !== id);
-    setData(nuevaData);
+function Listado({ data, setData, dataFilter, setDataFilter }) {
+//   const [filtro, setFiltro] = useState('');
 
-    const nuevaDataFilter = dataFilter.filter(
-      (colaborador) => colaborador.id !== id
-    );
-    setDataFilter(nuevaDataFilter);
-  };
+//   const handleChange = (e) => {
+//     setFiltro(e.target.value);
+//   };
 
-  // definir la lista de colaboradores
-  const colaboradores = dataFilter.length ? dataFilter : BaseColaboradores;
+//   // filtro a la lista de colaboradores
+//   const colaboradoresFiltrados = data.filter((colaborador) => {
+//     if (colaborador && colaborador.nombre) {
+//       return (
+//         colaborador.nombre.toLowerCase().includes(filtro.toLowerCase())
+//       );
+//     }
+//     return false;
+//   });
+  
+//   const deleteColaborador = (id) => {
+//     const nuevaData = data.filter((colaborador) => colaborador.id !== id);
+//     setData(nuevaData);
+
+//     const nuevaDataFilter = dataFilter.filter((colaborador) => colaborador.id !== id);
+//     setDataFilter(nuevaDataFilter);
+//   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-12 mx-auto">
           <h2 className="text-center">Listado de colaboradores</h2>
+          <div className="mb-3 mt-3">
+            {/* <input
+              type="text"
+              className="form-control"
+              placeholder="Buscar colaborador..."
+              value={filtro}
+              onChange={handleChange}
+            /> */}
+          </div>
           <table className="table">
             <thead>
               <tr>
@@ -32,7 +50,7 @@ const Listado = ({ data, setData, dataFilter, setDataFilter }) => {
               </tr>
             </thead>
             <tbody>
-              {colaboradores.map((colaborador) => (
+              {colaboradoresFiltrados.map((colaborador) => (
                 <tr key={colaborador.id}>
                   <td>{colaborador.nombre}</td>
                   <td>{colaborador.correo}</td>
@@ -55,13 +73,5 @@ const Listado = ({ data, setData, dataFilter, setDataFilter }) => {
       </div>
     </div>
   );
-};
-
-Listado.propTypes = {
-  data: PropTypes.array.isRequired,
-  setData: PropTypes.func.isRequired,
-  dataFilter: PropTypes.array.isRequired,
-  setDataFilter: PropTypes.func.isRequired,
-};
-
+}
 export default Listado;
