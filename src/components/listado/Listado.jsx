@@ -1,7 +1,8 @@
 import  { useState } from 'react';
 
 // // function Listado() {
-function Listado({ data, setData, dataFilter, setDataFilter }) {
+function Listado({ data, setData, dataFilter, setDataFilter, colaboradores }) {
+  console.log("colaboradores recibidos!!!!!!!!!!",colaboradores)
   const [filtro, setFiltro] = useState('');
 
   // const handleChange = (e) => {
@@ -51,7 +52,8 @@ function Listado({ data, setData, dataFilter, setDataFilter }) {
               </tr>
             </thead>
             <tbody>
-              {colaboradoresFiltrados.map((colaborador) => (
+              {/* {colaboradoresFiltrados.map((colaborador, index) => ( */}
+              {colaboradores.map((colaborador) => (
                 <tr key={colaborador.id}>
                   <td>{colaborador.nombre}</td>
                   <td>{colaborador.correo}</td>

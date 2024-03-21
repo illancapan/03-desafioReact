@@ -16,16 +16,16 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
   // //   ? (parseInt(data[data.length - 1].id) + 1).toString()
   // //   : "0";
 
-  // // // useEffect(() => {
-  // // //   setInputs({
-  // // //     nombre: "",
-  // // //     email: "",
-  // // //     edad: "",
-  // // //     cargo: "",
-  // // //     telefono: "",
-  // // //   });
-
-  // // // }, [data]);
+  useEffect(() => {
+    setInputs({
+      nombre: "",
+      email: "",
+      edad: "",
+      cargo: "",
+      telefono: "",
+    });
+    console.log(data)
+  }, [data]);
 
   const handleChange = (e) => {
     const { name, value } =e.target;
@@ -116,6 +116,7 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
         telefono,
         // id: nuevaId,
       });
+      // agregarColaborador(inputs);
 
       // RESTABLECER VALORES DE LOS CAMPOS DEL FORMULARIO
       setInputs({
@@ -126,6 +127,7 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
         telefono: "",
       });
 
+      console.log("datis desoyes de agregar", data)
     // console.log("Datos del colaborador agregado:", {
     //   nombre,
     //   email,

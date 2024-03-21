@@ -48,7 +48,7 @@ function App() {
   // Agregar un nuevo colaborador
   const agregarColaborador = (nuevoColaborador) => {
     setColaboradores([...colaboradores, nuevoColaborador]);
-    console.log("Colaborador agregado exitosamente.", "success");
+    console.log("Colaborador agregado exitosamente. Al finn!");
     // mostrarAlerta("Colaborador agregado exitosamente.", "success");
     console.log(nuevoColaborador)
   };
@@ -67,6 +67,7 @@ function App() {
     <>
       {/* //  <Buscador filtrarColaboradores={filtrarColaboradores} />  */}
       <Listado 
+      colaboradores={colaboradores}
         data={colaboradoresFiltrados}
         setData={setColaboradoresFiltrados}
         dataFilter={colaboradoresFiltrados}
@@ -78,8 +79,8 @@ function App() {
         // // alert={agregarAlert}
         data={colaboradores}
         setData={setColaboradores}
-        // dataFilter={colaboradores}
-        // setDataFilter={setColaboradores}
+        dataFilter={colaboradores}
+        setDataFilter={setColaboradores}
       />
       {/* {mensajeAlerta && <Alert type={tipoAlerta} message={mensajeAlerta} />} */}
     </>
