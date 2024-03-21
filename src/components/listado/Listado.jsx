@@ -1,21 +1,22 @@
 import  { useState } from 'react';
 
+// // function Listado() {
 function Listado({ data, setData, dataFilter, setDataFilter }) {
-//   const [filtro, setFiltro] = useState('');
+  const [filtro, setFiltro] = useState('');
 
-//   const handleChange = (e) => {
-//     setFiltro(e.target.value);
-//   };
+  // const handleChange = (e) => {
+  //   setFiltro(e.target.value);
+  // };
 
-//   // filtro a la lista de colaboradores
-//   const colaboradoresFiltrados = data.filter((colaborador) => {
-//     if (colaborador && colaborador.nombre) {
-//       return (
-//         colaborador.nombre.toLowerCase().includes(filtro.toLowerCase())
-//       );
-//     }
-//     return false;
-//   });
+  // filtro a la lista de colaboradores
+  const colaboradoresFiltrados = data.filter((colaborador) => {
+    if (colaborador && colaborador.nombre) {
+      return (
+        colaborador.nombre.toLowerCase().includes(filtro.toLowerCase())
+      );
+    }
+    return false;
+  });
   
 //   const deleteColaborador = (id) => {
 //     const nuevaData = data.filter((colaborador) => colaborador.id !== id);
@@ -63,7 +64,7 @@ function Listado({ data, setData, dataFilter, setDataFilter }) {
                       onClick={() => deleteColaborador(colaborador.id)}
                     >
                       Eliminar
-                    </button> */}
+                    </button>  */}
                   </td>
                 </tr>
               ))}
