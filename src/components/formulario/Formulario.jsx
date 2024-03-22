@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-// import Alert from "../alert/Alert";
+import Alert from "../alert/Alert";
 
-const Formulario = ({ data, setData, agregarColaborador }) => {
+const Formulario = ({ data, setData, agregarColaborador, mostrarAlerta }) => {
   const [inputs, setInputs] = useState({
     nombre: "",
-    email: "",
+    correo: "",
     edad: "",
     cargo: "",
     telefono: "",
   });
 
-  // const [mensajeAlerta, setMensajeAlerta] = useState(""); // Estado para manejar los mensajes
-  // const [tipoAlerta, setTipoAlerta] = useState(""); // Estado para manejar el tipo de mensaje
+  // const [mensajeAlerta, setMensajeAlerta] = useState("");
+  // const [tipoAlerta, setTipoAlerta] = useState("");
   // // const nuevaId = data.length
   // //   ? (parseInt(data[data.length - 1].id) + 1).toString()
   // //   : "0";
@@ -19,16 +19,16 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
   useEffect(() => {
     setInputs({
       nombre: "",
-      email: "",
+      correo: "",
       edad: "",
       cargo: "",
       telefono: "",
     });
-    console.log(data)
+    console.log(data);
   }, [data]);
 
   const handleChange = (e) => {
-    const { name, value } =e.target;
+    const { name, value } = e.target;
     setInputs((prevInputs) => ({
       ...prevInputs,
       [name]: value,
@@ -43,39 +43,53 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
     const regexTelef = /^[0-9]{9}$/;
 
     // OBTENER CAMPOS
-    const { nombre, email, edad, cargo, telefono } = inputs;
+    const { nombre, correo, edad, cargo, telefono } = inputs;
 
     // VERIFICAR ALGUN CAMPO ESTA VACIO
     if (
-      ![nombre, email, edad, cargo, telefono].every((field) => field.trim())
+      ![nombre, correo, edad, cargo, telefono].every((field) => field.trim())
     ) {
       console.log("Debes completar todos los campos.");
-      //   setMensajeAlerta("Debes completar todos los campos.");
+      mostrarAlerta("Debes completar todos los campos.", "error");
       // setTipoAlerta("error");
       return;
     }
-    console.log("Valores de los campos:", nombre, email, edad, cargo, telefono);
+    console.log("Valores de los campos:", nombre, correo, edad, cargo, telefono);
 
     // VERIFICAR SI EL EMAIL TIENE UN FORMATO
-    if (!regexEmail.test(email)) {
+    if (!regexEmail.test(correo)) {
       console.log("el Correo no es valido mejoralo!");
-      // setMensajeAlerta("Correo electrónico no válido.");
+      mostrarAlerta("El Correo no es valido mejoralo!", "error");
+
+      setMensajeAlerta("Correo electrónico no válido.");
       // setTipoAlerta("error");
       return;
     }
 
-    // VERIFICAR SI LA EDAD ES UN NUMERO VALIDO
+    // // VERIFICAR SI LA EDAD ES UN NUMERO VALIDO
+    // const parsedAge = parseInt(edad);
+    // if (isNaN(parsedAge) || parsedAge <= 0 || parsedAge >= 100) {
+    //   console.log("La edad debe ser un número válido.");
+    //   mostrarAlerta("La edad debe ser un número válido.","error");
+    //   // setTipoAlerta("error");
+    //   return;
+    // }
     const parsedAge = parseInt(edad);
-    if (isNaN(parsedAge) || parsedAge <= 0 || parsedAge >= 100) {
+    if (
+      isNaN(parsedAge) ||
+      parsedAge <= 0 ||
+      parsedAge >= 100 ||
+      !/^\d+$/.test(edad)
+    ) {
       console.log("La edad debe ser un número válido.");
-      // setMensajeAlerta("La edad debe ser un número válido.");
-      // setTipoAlerta("error");
+      mostrarAlerta("La edad debe ser un número válido.", "error");
       return;
     }
+
     // VERIFICAR SI EL TELEFONO TIENE UN FORMATO VALIDO
     if (!regexTelef.test(telefono)) {
       console.log("El teléfono debe tener 9 dígitos.!!!!!!");
-      //     setMensajeAlerta("El teléfono debe tener 9 dígitos.");
+      mostrarAlerta("El teléfono debe tener 9 dígitos.", "error");
       //     setTipoAlerta("error");
       return;
     }
@@ -99,7 +113,7 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
       ...data,
       {
         nombre,
-        email,
+        correo,
         edad,
         cargo,
         telefono,
@@ -107,27 +121,27 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
       },
     ]);
 
-      // llama funcionn agregarColaborador pasando el nuevo colaborador
-      agregarColaborador({
-        nombre,
-        email,
-        edad,
-        cargo,
-        telefono,
-        // id: nuevaId,
-      });
-      // agregarColaborador(inputs);
+    // llama funcionn agregarColaborador pasando el nuevo colaborador
+    agregarColaborador({
+      nombre,
+      correo,
+      edad,
+      cargo,
+      telefono,
+      // id: nuevaId,
+    });
+    // agregarColaborador(inputs);
 
-      // RESTABLECER VALORES DE LOS CAMPOS DEL FORMULARIO
-      setInputs({
-        nombre: "",
-        email: "",
-        edad: "",
-        cargo: "",
-        telefono: "",
-      });
+    // RESTABLECER VALORES DE LOS CAMPOS DEL FORMULARIO
+    setInputs({
+      nombre: "",
+      correo: "",
+      edad: "",
+      cargo: "",
+      telefono: "",
+    });
 
-      console.log("datis desoyes de agregar", data)
+    console.log("datis desoyes de agregar", data);
     // console.log("Datos del colaborador agregado:", {
     //   nombre,
     //   email,
@@ -137,16 +151,6 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
     //   // id: nuevaId,
     // });
   };
-
-  // useEffect(() => {
-  //   if (mensajeAlerta) {
-  //     const timeout = setTimeout(() => {
-  //       setMensajeAlerta("");
-  //       setTipoAlerta("");
-  //     }, 4000); // 4 segundos no espera este tiempo de carga
-  //     return () => clearTimeout(timeout);
-  //  }
-  // }, [mensajeAlerta]);
 
   return (
     <>
@@ -170,8 +174,8 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
                   type="email"
                   className="form-control"
                   placeholder="Email del colaborador"
-                  name="email"
-                  value={inputs.email}
+                  name="correo"
+                  value={inputs.correo}
                   onChange={handleChange}
                 />
               </div>
@@ -217,7 +221,7 @@ const Formulario = ({ data, setData, agregarColaborador }) => {
   );
 };
 
-// VALIDACION DE PROPS
+// VALIDACION DE mostrarAlerta
 // Formulario.propTypes = {
 //   data: PropTypes.array.isRequired,
 //   setData: PropTypes.func.isRequired,
